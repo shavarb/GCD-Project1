@@ -13,15 +13,16 @@ This Script will do the following:
 6. Write out a tidy Dataset 
 
 
-Here are the details below
+#Here are the details below
 
-########This will Read in the Data if you have the data set in your current directory##########
-
+#This will Read in the Data if you have the data set in your current directory##########
+```{r}
 # Read in dataset each data file
 # Labels and Features
 activity_labels <- read.table("./UCI HAR Dataset/activity_labels.txt", header=FALSE,)
 features <- read.table("./UCI HAR Dataset/features.txt", header=FALSE)
-
+```
+```{r}
 #Test data
 X_test <- read.table("./UCI HAR Dataset/test/X_test.txt", header = FALSE)
 y_test <- read.table("./UCI HAR Dataset/test/y_test.txt", header = FALSE)
@@ -31,10 +32,10 @@ subject_test <- read.table("./UCI HAR Dataset/test/subject_test.txt", header=FAL
 X_train <- read.table("./UCI HAR Dataset/train/X_train.txt", header=FALSE)
 y_train <- read.table("./UCI HAR Dataset/train/y_train.txt", header=FALSE)
 subject_train <- read.table("./UCI HAR Dataset/train/subject_train.txt", header = FALSE)
+```
 
-
-############### Merge Train and Test Data Set #####################
-
+# Merge Train and Test Data Set #####################
+```{r}
 ## Create a data frame with all the test and train labels
 #test and train set cloumn bind
 labels_test <- cbind(subject_test,y_test)
@@ -69,10 +70,10 @@ merged_data3$Activity_Labels[merged_data3$Activity_Labels == 3] <- "WALKING_DOWN
 merged_data3$Activity_Labels[merged_data3$Activity_Labels == 4] <- "SITTING"
 merged_data3$Activity_Labels[merged_data3$Activity_Labels == 5] <- "STANDING"
 merged_data3$Activity_Labels[merged_data3$Activity_Labels == 6] <- "LAYING"
+````
 
-
-################ Calculate mean By Subjects and Activity#############
-
+#Calculate mean By Subjects and Activity#############
+```{r}
 #library(reshape2)
 require(reshape2)
 merged_data3_average <- melt(merged_data3, id = c("Subjects","Activity_Labels"))
@@ -81,5 +82,5 @@ merged_data3_mean
 
 #Write tidy data out to a text file to working directory
 write.table(merged_data3_mean, file="tidy_data.txt", sep="\t", row.names = FALSE)
-
-##The last line will write out the tidy data file also uploaded in part 1
+``
+#The last line will write out the tidy data file also uploaded in part 1
